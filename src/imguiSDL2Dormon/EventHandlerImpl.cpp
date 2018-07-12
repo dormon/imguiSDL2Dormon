@@ -215,7 +215,6 @@ void EventHandlerImpl::newFrame(SDL_Window*window){
   io.DeltaTime = time > 0 ? (float)((double)(current_time - time) / frequency) : (float)(1.0f / 60.0f);
   time = current_time;
   
-
   updateMousePosAndButtons();
   
   updateMouseCursor();
@@ -243,15 +242,31 @@ bool EventHandlerImpl::processTextInput(SDL_Event*event){
   return true;
 }
 
+bool isShiftPressed(){
+  return (SDL_GetModState() & KMOD_SHIFT) != 0;
+}
+
+bool isCtrlPressed(){
+  return (SDL_GetModState() & KMOD_CTRL ) != 0;
+}
+
+bool isAltPressed(){
+  return (SDL_GetModState() & KMOD_ALT  ) != 0;
+}
+
+bool isSuperPressed(){
+  return (SDL_GetModState() & KMOD_GUI  ) != 0;
+}
+
 bool EventHandlerImpl::processKey(SDL_Event*event){
   ImGuiIO& io = ImGui::GetIO();
   int key = event->key.keysym.scancode;
   IM_ASSERT(key >= 0 && key < IM_ARRAYSIZE(io.KeysDown));
   io.KeysDown[key] = (event->type == SDL_KEYDOWN);
-  io.KeyShift = ((SDL_GetModState() & KMOD_SHIFT) != 0);
-  io.KeyCtrl  = ((SDL_GetModState() & KMOD_CTRL ) != 0);
-  io.KeyAlt   = ((SDL_GetModState() & KMOD_ALT  ) != 0);
-  io.KeySuper = ((SDL_GetModState() & KMOD_GUI  ) != 0);
+  io.KeyShift = isShiftPressed();
+  io.KeyCtrl  = isCtrlPressed ();
+  io.KeyAlt   = isAltPressed  ();
+  io.KeySuper = isSuperPressed();
   return true;
 }
 
