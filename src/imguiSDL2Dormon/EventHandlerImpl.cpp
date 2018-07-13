@@ -220,7 +220,7 @@ void EventHandlerImpl::newFrame(SDL_Window*window){
   updateMouseCursor();
 }
 
-bool EventHandlerImpl::processMouseWheel(SDL_Event*event){
+bool EventHandlerImpl::processMouseWheel(SDL_Event const*event){
   ImGuiIO& io = ImGui::GetIO();
   if (event->wheel.x > 0) io.MouseWheelH += 1;
   if (event->wheel.x < 0) io.MouseWheelH -= 1;
@@ -229,14 +229,14 @@ bool EventHandlerImpl::processMouseWheel(SDL_Event*event){
   return true;
 }
 
-bool EventHandlerImpl::processMouseButtonDown(SDL_Event*event){
+bool EventHandlerImpl::processMouseButtonDown(SDL_Event const*event){
   if (event->button.button == SDL_BUTTON_LEFT  ) mousePressed[0] = true;
   if (event->button.button == SDL_BUTTON_RIGHT ) mousePressed[1] = true;
   if (event->button.button == SDL_BUTTON_MIDDLE) mousePressed[2] = true;
   return true;
 }
 
-bool EventHandlerImpl::processTextInput(SDL_Event*event){
+bool EventHandlerImpl::processTextInput(SDL_Event const*event){
   ImGuiIO& io = ImGui::GetIO();
   io.AddInputCharactersUTF8(event->text.text);
   return true;
@@ -258,7 +258,7 @@ bool isSuperPressed(){
   return (SDL_GetModState() & KMOD_GUI  ) != 0;
 }
 
-bool EventHandlerImpl::processKey(SDL_Event*event){
+bool EventHandlerImpl::processKey(SDL_Event const*event){
   ImGuiIO& io = ImGui::GetIO();
   int key = event->key.keysym.scancode;
   IM_ASSERT(key >= 0 && key < IM_ARRAYSIZE(io.KeysDown));
@@ -270,7 +270,7 @@ bool EventHandlerImpl::processKey(SDL_Event*event){
   return true;
 }
 
-bool EventHandlerImpl::processEvent(SDL_Event* event){
+bool EventHandlerImpl::processEvent(SDL_Event const*event){
   switch (event->type){
     case SDL_MOUSEWHEEL     :return processMouseWheel     (event);
     case SDL_MOUSEBUTTONDOWN:return processMouseButtonDown(event);

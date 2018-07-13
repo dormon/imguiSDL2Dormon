@@ -15,7 +15,7 @@ void EventHandler::newFrame(SDL_Window*window){
   impl->newFrame(window);
 }
 
-bool EventHandler::processEvent(SDL_Event* event){
+bool EventHandler::processEvent(SDL_Event const* event){
   return impl->processEvent(event);
 }
 

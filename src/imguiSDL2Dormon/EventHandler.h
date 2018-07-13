@@ -16,7 +16,7 @@ class IMGUISDL2DORMON_EXPORT imguiSDL2Dormon::EventHandler{
     EventHandler(SDL_Window*window,void*sdl_gl_context = nullptr);
     ~EventHandler();
     void newFrame(SDL_Window*window);
-    bool processEvent(SDL_Event* event);
+    bool processEvent(SDL_Event const* event);
   protected:
     friend class EventHandlerImpl;
     std::unique_ptr<EventHandlerImpl>impl;

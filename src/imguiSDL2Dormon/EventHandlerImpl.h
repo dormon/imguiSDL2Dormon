@@ -10,13 +10,13 @@ class EventHandlerImpl{
     EventHandlerImpl(SDL_Window*window,void*sdl_gl_context = nullptr);
     ~EventHandlerImpl();
     void newFrame(SDL_Window*window);
-    bool processEvent(SDL_Event* event);
+    bool processEvent(SDL_Event const* event);
     void updateMousePosAndButtons();
     void updateMouseCursor();
-    bool processMouseWheel(SDL_Event*event);
-    bool processMouseButtonDown(SDL_Event*event);
-    bool processTextInput(SDL_Event*event);
-    bool processKey(SDL_Event*event);
+    bool processMouseWheel(SDL_Event const*event);
+    bool processMouseButtonDown(SDL_Event const*event);
+    bool processTextInput(SDL_Event const*event);
+    bool processKey(SDL_Event const*event);
     void fillKeyMap();
     void fillMouseCursors();
     void setMousePosition();
