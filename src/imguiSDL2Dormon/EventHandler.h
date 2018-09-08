@@ -11,12 +11,12 @@ namespace imguiSDL2Dormon{
   class EventHandler;
 }
 
-class IMGUISDL2DORMON_EXPORT imguiSDL2Dormon::EventHandler{
+class imguiSDL2Dormon::EventHandler{
   public:
-    EventHandler(SDL_Window*window,void*sdl_gl_context = nullptr);
-    ~EventHandler();
-    void newFrame(SDL_Window*window);
-    bool processEvent(SDL_Event const* event);
+    IMGUISDL2DORMON_EXPORT EventHandler(SDL_Window*window,void*sdl_gl_context = nullptr);
+	IMGUISDL2DORMON_EXPORT ~EventHandler();
+	IMGUISDL2DORMON_EXPORT void newFrame(SDL_Window*window);
+	IMGUISDL2DORMON_EXPORT bool processEvent(SDL_Event const* event);
   protected:
     friend class EventHandlerImpl;
     std::unique_ptr<EventHandlerImpl>impl;
