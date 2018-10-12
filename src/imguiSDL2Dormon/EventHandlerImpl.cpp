@@ -226,20 +226,20 @@ bool EventHandlerImpl::processMouseWheel(SDL_Event const*event){
   if (event->wheel.x < 0) io.MouseWheelH -= 1;
   if (event->wheel.y > 0) io.MouseWheel  += 1;
   if (event->wheel.y < 0) io.MouseWheel  -= 1;
-  return true;
+  return io.WantCaptureMouse;
 }
 
 bool EventHandlerImpl::processMouseButtonDown(SDL_Event const*event){
   if (event->button.button == SDL_BUTTON_LEFT  ) mousePressed[0] = true;
   if (event->button.button == SDL_BUTTON_RIGHT ) mousePressed[1] = true;
   if (event->button.button == SDL_BUTTON_MIDDLE) mousePressed[2] = true;
-  return true;
+  return ImGui::GetIO().WantCaptureMouse;
 }
 
 bool EventHandlerImpl::processTextInput(SDL_Event const*event){
   ImGuiIO& io = ImGui::GetIO();
   io.AddInputCharactersUTF8(event->text.text);
-  return true;
+  return io.WantCaptureKeyboard;
 }
 
 bool isShiftPressed(){
@@ -267,7 +267,7 @@ bool EventHandlerImpl::processKey(SDL_Event const*event){
   io.KeyCtrl  = isCtrlPressed ();
   io.KeyAlt   = isAltPressed  ();
   io.KeySuper = isSuperPressed();
-  return true;
+  return io.WantCaptureKeyboard;
 }
 
 bool EventHandlerImpl::processEvent(SDL_Event const*event){
@@ -278,6 +278,7 @@ bool EventHandlerImpl::processEvent(SDL_Event const*event){
     case SDL_KEYDOWN        :
     case SDL_KEYUP          :return processKey            (event);
   }
+  if(event->type == SDL_MOUSEMOTION && ImGui::GetIO().WantCaptureMouse)return true;
   return false;
 }
 
