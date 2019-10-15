@@ -1,6 +1,6 @@
 #pragma once
 
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include <imguiDormon/imgui.h>
 
 namespace imguiSDL2Dormon{
