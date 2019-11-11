@@ -31,8 +31,8 @@ set(INTERFACE_INCLUDES )
 #If version is specified, it has to be the second parameter (B)
 set(ExternPrivateLibraries )
 set(ExternPublicLibraries 
-  SDL2\\ CONFIG
-  imguiDormon\\ 1.0.0\\ CONFIG
+  SDL2\\ 2.0.9\\ CONFIG\\ REQUIRED
+  imguiDormon\\ 1.0.0\\ CONFIG\\ REQUIRED
   )
 set(ExternInterfaceLibraries )
 
